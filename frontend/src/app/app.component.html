@@ -1,0 +1,71 @@
+<h1>Desafio TOTVS</h1>
+
+<section>
+  <h2>Criar cliente</h2>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.controls.name.invalid">{{
+        errorClientMessage(form.controls.name)
+      }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Endereço</mat-label>
+      <input matInput formControlName="address" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Bairro</mat-label>
+      <input matInput formControlName="district" />
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <h3>Telefones</h3>
+    <button mat-raised-button color="info" (click)="addPhone()">
+      Novo telefone
+    </button>
+    <div *ngFor="let phone of phones.controls; index as i" class="mt-1">
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix>phone</mat-icon>
+        <span matTextPrefix>+55 &nbsp;</span>
+        <mat-label>Número</mat-label>
+        <input matInput [formControl]="phones.controls[i].controls.number" />
+        <mat-hint>(XX) 9XXXX-XXXX</mat-hint>
+        <mat-error *ngIf="phones.controls[i].controls.number.invalid">{{
+          errorPhoneMessage(phones.controls[i].controls.number)
+        }}</mat-error>
+      </mat-form-field>
+      <mat-icon
+        class="delete-icon"
+        matTooltip="Remover telefone"
+        (click)="deletePhone(i)"
+        >delete</mat-icon
+      >
+    </div>
+    <mat-divider></mat-divider>
+    <button mat-raised-button color="primary" class="mt-1-5" (click)="save()">
+      Cadastrar
+    </button>
+  </form>
+</section>
+
+<section class="mt-1">
+  <h2>Clientes cadastrados</h2>
+
+  <div class="card-container">
+    <mat-card *ngFor="let client of clients$ | async">
+      <mat-card-header>
+        <mat-card-title>{{ client.name }}</mat-card-title>
+        <mat-card-subtitle
+          >{{ client.address }} - {{ client.district }}</mat-card-subtitle
+        >
+      </mat-card-header>
+      <mat-card-content *ngIf="client.phones && client.phones.length > 0">
+        <div class="telefone" *ngFor="let phone of client.phones">
+          <mat-icon>contact_phone</mat-icon>
+          <span>{{ phone.number }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

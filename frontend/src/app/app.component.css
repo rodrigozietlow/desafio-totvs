@@ -1,0 +1,43 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-container > mat-card {
+  flex: 0 0 auto;
+  margin: 0.5em 1em 0 0.5em;
+}
+
+.telefone > span,
+.telefone > mat-icon {
+  vertical-align: middle;
+  margin-right: 0.25em;
+}
+
+form {
+  width: 24em;
+}
+
+mat-form-field {
+  margin-top: 0.5em;
+}
+
+.mt-1 {
+  margin-top: 1em;
+}
+
+.mt-1-5 {
+  margin-top: 1.5em;
+}
+
+.delete-icon {
+  vertical-align: middle;
+  font-size: 2.5em;
+  height: 1em;
+  width: 1em;
+  cursor: pointer;
+}
+
+mat-divider {
+  margin: 1.25em 0;
+}
